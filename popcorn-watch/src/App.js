@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import MovieBox from "./components/MovieBox";
-
+const key = process.env.REACT_APP_API_KEY
 const API_URL =
-  "https://api.themoviedb.org/3/movie/popular?api_key=c12c5cd800bb340b13d1b979be85e130&language=en-US&page=1";
+  `https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=en-US&page=1`;
 function App() {
   // States
   const [movies, setMovies] = useState([]);
