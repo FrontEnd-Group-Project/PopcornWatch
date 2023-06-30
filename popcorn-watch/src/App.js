@@ -1,29 +1,24 @@
-import { useEffect, useState } from "react";
 import "./App.css";
-import MovieBox from "./components/MovieBox";
-const key = process.env.REACT_APP_API_KEY
-const API_URL =
-  `https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=en-US&page=1`;
+import {Home} from './routes/Home'
+import { 
+  createBrowserRouter,
+  RouterProvider,
+  } from 'react-router-dom';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Home/>,
+  },
+])
+
 function App() {
-  // States
-  const [movies, setMovies] = useState([]);
-
-  useEffect(() => {
-    fetch(API_URL)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setMovies(data.results);
-      });
-  }, []);
-
   return (
-    <div>
-      {movies.map((movie) => (
-        <MovieBox key={movie.id} {...movie} />
-      ))}
+    <div className='mt-4 mx-auto h-75 w-75'>
+      <RouterProvider router={router}/>
     </div>
   );
 }
 
-export default App;
+
+export {App};
