@@ -1,5 +1,6 @@
 import "./App.css";
-import {Home} from './routes/Home'
+import { Home } from './routes/Home'
+import { Shows } from './routes/Shows'
 import { 
   createBrowserRouter,
   RouterProvider,
@@ -10,6 +11,10 @@ const router = createBrowserRouter([
     path: '/',
     element: <Home/>,
   },
+  {
+    path: '/shows',
+    element: <Shows/>
+  }
 ])
 
 function App() {
