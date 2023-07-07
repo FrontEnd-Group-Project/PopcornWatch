@@ -5,27 +5,27 @@ import MovieBox from "../components/MovieBox";
 import { Navigation } from "../components/Navigation";
 
 const key = process.env.REACT_APP_API_KEY;
-const API_URL = `https://api.themoviedb.org/3/tv/popular?api_key=${key}&language=en-US&page=1`;
-function Shows() {
-  const [popularShows, setPopularShows] = useState([]);
+const API_URL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${key}&language=en-US&page=1`;
+function Upcoming() {
+  const [upcomingItems, setUpcomingItems] = useState([]);
 
   useEffect(() => {
     fetch(API_URL)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setPopularShows(data.results);
+        setUpcomingItems(data.results);
       });
   }, []);
 
   return (
     <div>
       <Navigation />
-      {popularShows.map((popularShow) => (
-        <MovieBox key={popularShow.id} {...popularShow} />
+      {upcomingItems.map((upcomingItem) => (
+        <MovieBox key={upcomingItem.id} {...upcomingItem} />
       ))}
     </div>
   );
 }
 
-export { Shows };
+export { Upcoming };
