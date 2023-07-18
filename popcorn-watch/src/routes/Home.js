@@ -12,18 +12,21 @@ function Home() {
     fetch(API_URL)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setMovies(data.results);
       });
   }, []);
 
   return (
-    <div>
+    <>
       <Navigation />
-      {movies.map((movie) => (
-        <MovieBox key={movie.id} {...movie} />
-      ))}
-    </div>
+      <div className="container">
+        <div className="grid">
+          {movies.map((movie) => (
+            <MovieBox key={movie.id} {...movie} />
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
 

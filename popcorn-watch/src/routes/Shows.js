@@ -19,12 +19,16 @@ function Shows() {
   }, []);
 
   return (
-    <div>
+    <>
       <Navigation />
-      {popularShows.map((popularShow) => (
-        <MovieBox key={popularShow.id} {...popularShow} />
-      ))}
-    </div>
+      <div className="container">
+        <div className="grid">
+          {popularShows.map((popularShow) => (
+            <MovieBox key={popularShow.id} {...popularShow} />
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
 
