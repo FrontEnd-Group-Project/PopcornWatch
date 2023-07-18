@@ -20,13 +20,7 @@ const MovieBox = ({
       className="card text-center mb-3"
       style={{ backgroundColor: "rgb(41, 38, 38)" }}
     >
-      <div className="card-body">
-        <img className="card-img-top" src={API_IMG + poster_path} />
-        <div className="card-body">
-          <button type="button" className="btn btn-light" onClick={handleShow}>
-            View More
-          </button>
-          <Modal show={show} onHide={handleClose}>
+      <Modal style={{opacity:1}} animation={false} show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title></Modal.Title>
             </Modal.Header>
@@ -49,6 +43,13 @@ const MovieBox = ({
               </Button>
             </Modal.Footer>
           </Modal>
+      <div className="card-body">
+        <img className="card-img-top" src={API_IMG + poster_path} />
+        <div className="card-body">
+          <button type="button" className="btn btn-light" onClick={handleShow}>
+            View More
+          </button>
+          
         </div>
       </div>
     </div>
