@@ -19,12 +19,16 @@ function Upcoming() {
   }, []);
 
   return (
-    <div>
+    <>
       <Navigation />
-      {upcomingItems.map((upcomingItem) => (
-        <MovieBox key={upcomingItem.id} {...upcomingItem} />
-      ))}
-    </div>
+      <div className="container">
+        <div className="grid">
+          {upcomingItems.map((upcomingItem) => (
+            <MovieBox key={upcomingItem.id} {...upcomingItem} />
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
 
