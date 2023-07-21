@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
 import "../App.css";
 import MovieBox from "../components/MovieBox";
-import { Navigation } from "../components/Navigation";
+import { NavLink } from "react-router-dom";
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import { Form, FormControl, Button } from "react-bootstrap";
+
 const key = process.env.REACT_APP_API_KEY;
 const API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=en-US&page=1`;
+const API_SEARCH =
+  "https://api.themoviedb.org/3/search/movie?api_key=<<api_key_here>>&query";
 function Home() {
   // States
   const [movies, setMovies] = useState([]);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     fetch(API_URL)
@@ -16,15 +23,58 @@ function Home() {
       });
   }, []);
 
+  const searchMovie = async (e) => {
+    e.preventDefault();
+    console.log("Searching");
+    try {
+      const url = `https://api.themoviedb.org/3/search/movie?api_key=bcc4ff10c2939665232d75d8bf0ec093&query=${query}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      console.log(data);
+      setMovies(data.results);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const changeHandler = (e) => {
+    setQuery(e.target.value);
+  };
   return (
     <>
-      <Navigation />
-      <div className="container">
-        <div className="grid">
-          {movies.map((movie) => (
-            <MovieBox key={movie.id} {...movie} />
-          ))}
-        </div>
+      <Navbar bg="black" expand="lg" variant="dark">
+        <Container fluid>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/shows">Shows</NavLink>
+          <NavLink to="/upcoming">Upcoming</NavLink>
+          <Form className="d-flex" onSubmit={searchMovie} autoComplete="off">
+            <FormControl
+              type="search"
+              placeholder="Search"
+              className="me-2"
+              aria-label="search"
+              name="query"
+              value={query}
+              onChange={changeHandler}
+            ></FormControl>
+            <Button variant="dark" type="submit">
+              Search
+            </Button>
+          </Form>
+        </Container>
+      </Navbar>
+      <div>
+        {movies.length > 0 ? (
+          <div className="container">
+            <div className="grid">
+              {movies.map((movieReq) => (
+                <MovieBox key={movieReq.id} {...movieReq} />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <h2>Sorry !! No Movies Found</h2>
+        )}
       </div>
     </>
   );
