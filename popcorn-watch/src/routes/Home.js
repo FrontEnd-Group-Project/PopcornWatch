@@ -4,7 +4,7 @@ import MovieBox from "../components/MovieBox";
 import { NavLink } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
-import { Form, FormControl, Button } from "react-bootstrap";
+import { FormControl, Button, InputGroup } from "react-bootstrap";
 
 const key = process.env.REACT_APP_API_KEY;
 const API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=en-US&page=1`;
@@ -24,16 +24,24 @@ function Home() {
   }, []);
 
   const searchMovie = async (e) => {
-    e.preventDefault();
-    console.log("Searching");
-    try {
-      const url = `https://api.themoviedb.org/3/search/movie?api_key=bcc4ff10c2939665232d75d8bf0ec093&query=${query}`;
-      const res = await fetch(url);
-      const data = await res.json();
-      console.log(data);
-      setMovies(data.results);
-    } catch (e) {
-      console.log(e);
+    const searchQuery = e.target.value;
+    if (e.target.value === "") {
+      fetch(API_URL)
+        .then((res) => res.json())
+        .then((data) => {
+          setMovies(data.results);
+        });
+    } else {
+      console.log("Searching");
+      try {
+        const url = `https://api.themoviedb.org/3/search/movie?api_key=bcc4ff10c2939665232d75d8bf0ec093&query=${e.target.value}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        console.log(data);
+        setMovies(data.results);
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
 
@@ -47,20 +55,16 @@ function Home() {
           <NavLink to="/">Home</NavLink>
           <NavLink to="/shows">Shows</NavLink>
           <NavLink to="/upcoming">Upcoming</NavLink>
-          <Form className="d-flex" onSubmit={searchMovie} autoComplete="off">
+          <InputGroup className="d-flex">
             <FormControl
-              type="search"
               placeholder="Search"
               className="me-2"
               aria-label="search"
               name="query"
-              value={query}
-              onChange={changeHandler}
+              // value={query}
+              onChange={searchMovie}
             ></FormControl>
-            <Button variant="dark" type="submit">
-              Search
-            </Button>
-          </Form>
+          </InputGroup>
         </Container>
       </Navbar>
       <div>
