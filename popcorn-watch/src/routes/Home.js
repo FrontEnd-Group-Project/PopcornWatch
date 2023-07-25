@@ -4,7 +4,7 @@ import MovieBox from "../components/MovieBox";
 import { NavLink } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
-import { FormControl, Button, InputGroup } from "react-bootstrap";
+import { FormControl, InputGroup } from "react-bootstrap";
 
 const key = process.env.REACT_APP_API_KEY;
 const API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=en-US&page=1`;
