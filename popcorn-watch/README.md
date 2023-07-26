@@ -1,4 +1,4 @@
-<h1 align="center"><b><i>Popcorn Watch</b></i></h1>
+# Popcorn Watch
 <img width="800" src="https://github.com/FrontEnd-Group-Project/PopcornWatch/assets/95986357/2bafac01-f87a-4aca-a1ef-ff327176e719">
 <br></br>
 This is a front end project that is was inspired by Netflix. In this app you are able to see all the newest movies and shows while also having the ability to learn a little bit more about them. It was created with React and Bootstrap. The app was deployed using Netlify.
