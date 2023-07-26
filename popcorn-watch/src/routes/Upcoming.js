@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import { FormControl, InputGroup } from "react-bootstrap";
+import logo from "./images/logo-no-background.png";
 
 const key = process.env.REACT_APP_API_KEY;
 const API_URL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${key}&language=en-US&page=1`;
@@ -47,15 +48,29 @@ function Upcoming() {
   const changeHandler = (e) => {
     setQuery(e.target.value);
   };
-  
+
   return (
     <>
-      <Navbar bg="black" expand="lg" variant="dark">
+      <Navbar bg="black" expand="lg" variant="dark" style={{ height: "90px" }}>
         <Container fluid>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/shows">Shows</NavLink>
-          <NavLink to="/upcoming">Upcoming</NavLink>
-          <InputGroup className="d-flex">
+          <Navbar.Brand href="/">
+            <img
+              src={logo}
+              className="d-inline-block align-top"
+              alt="React Bootstrap logo"
+              style={{ width: "130px", height: "70px", marginTop: "-20px" }}
+            />
+          </Navbar.Brand>
+          <NavLink to="/" className="nav-links">
+            Home
+          </NavLink>
+          <NavLink to="/shows" className="nav-links">
+            Shows
+          </NavLink>
+          <NavLink to="/upcoming" className="nav-links">
+            Upcoming
+          </NavLink>
+          <InputGroup className="d-flex" style={{ width: "auto" }}>
             <FormControl
               placeholder="Search"
               className="me-2"
@@ -69,16 +84,16 @@ function Upcoming() {
       </Navbar>
       <div>
         {upcomingItems.length > 0 ? (
-      <div className="container">
-        <div className="grid">
-          {upcomingItems.map((upcomingItem) => (
-            <MovieBox key={upcomingItem.id} {...upcomingItem} />
-          ))}
-        </div>
-      </div>
-      ) : (
-        <h2>Sorry !! No Upcoming Movies Found</h2>
-      )}
+          <div className="container">
+            <div className="grid">
+              {upcomingItems.map((upcomingItem) => (
+                <MovieBox key={upcomingItem.id} {...upcomingItem} />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <h2>Sorry !! No Upcoming Movies Found</h2>
+        )}
       </div>
     </>
   );

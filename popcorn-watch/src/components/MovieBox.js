@@ -18,38 +18,42 @@ const MovieBox = ({
   return (
     <div
       className="card text-center mb-3"
-      style={{ backgroundColor: "rgb(41, 38, 38)" }}
+      style={{ backgroundColor: "rgb(24 22 22" }}
     >
-      <Modal style={{opacity:1}} animation={false} show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title></Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <img
-                className="card-img-top"
-                style={{ width: "14rem" }}
-                src={API_IMG + poster_path}
-              />
-              <h3>{title}</h3>
-              <h4>IMDb: {vote_average}</h4>
-              <h5>Release Date: {release_date}</h5>
-              <br></br>
-              <h6>Overview</h6>
-              <p>{overview}</p>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
-            </Modal.Footer>
-          </Modal>
+      <Modal
+        style={{ opacity: 1 }}
+        animation={false}
+        show={show}
+        onHide={handleClose}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title></Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <img
+            className="card-img-top"
+            style={{ width: "14rem" }}
+            src={API_IMG + poster_path}
+          />
+          <h3>{title}</h3>
+          <h4>IMDb: {vote_average}</h4>
+          <h5>Release Date: {release_date}</h5>
+          <br></br>
+          <h6>Overview</h6>
+          <p>{overview}</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <div className="card-body">
         <img className="card-img-top" src={API_IMG + poster_path} />
         <div className="card-body">
           <button type="button" className="btn btn-light" onClick={handleShow}>
             View More
           </button>
-          
         </div>
       </div>
     </div>

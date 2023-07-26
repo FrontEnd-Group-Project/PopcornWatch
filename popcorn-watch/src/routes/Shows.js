@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
 import { FormControl, InputGroup } from "react-bootstrap";
+import logo from "./images/logo-no-background.png";
 
 const key = process.env.REACT_APP_API_KEY;
 const API_URL = `https://api.themoviedb.org/3/tv/popular?api_key=${key}&language=en-US&page=1`;
@@ -23,7 +24,6 @@ function Shows() {
         setPopularShows(data.results);
       });
   }, []);
-
 
   const searchMovie = async (e) => {
     const searchQuery = e.target.value;
@@ -53,36 +53,50 @@ function Shows() {
 
   return (
     <>
-    <Navbar bg="black" expand="lg" variant="dark">
-    <Container fluid>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/shows">Shows</NavLink>
-      <NavLink to="/upcoming">Upcoming</NavLink>
-      <InputGroup className="d-flex">
-        <FormControl
-          placeholder="Search"
-          className="me-2"
-          aria-label="search"
-          name="query"
-          // value={query}
-          onChange={searchMovie}
-        ></FormControl>
-      </InputGroup>
-    </Container>
-  </Navbar>
-    <div>
-      {popularShows.length > 0 ? (
-      <div className="container">
-        <div className="grid">
-          {popularShows.map((popularShow) => (
-            <MovieBox key={popularShow.id} {...popularShow} />
-          ))}
-        </div>
-      </div>
-      ) : (
-        <h2>Sorry !! No Shows Found</h2>
+      <Navbar bg="black" expand="lg" variant="dark" style={{ height: "90px" }}>
+        <Container fluid>
+          <Navbar.Brand href="/">
+            <img
+              src={logo}
+              className="d-inline-block align-top"
+              alt="React Bootstrap logo"
+              style={{ width: "130px", height: "70px", marginTop: "-20px" }}
+            />
+          </Navbar.Brand>
+          <NavLink to="/" className="nav-links">
+            Home
+          </NavLink>
+          <NavLink to="/shows" className="nav-links">
+            Shows
+          </NavLink>
+          <NavLink to="/upcoming" className="nav-links">
+            Upcoming
+          </NavLink>
+          <InputGroup className="d-flex" style={{ width: "auto" }}>
+            <FormControl
+              placeholder="Search"
+              className="me-2"
+              aria-label="search"
+              name="query"
+              // value={query}
+              onChange={searchMovie}
+            ></FormControl>
+          </InputGroup>
+        </Container>
+      </Navbar>
+      <div>
+        {popularShows.length > 0 ? (
+          <div className="container">
+            <div className="grid">
+              {popularShows.map((popularShow) => (
+                <MovieBox key={popularShow.id} {...popularShow} />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <h2>Sorry !! No Shows Found</h2>
         )}
-    </div>
+      </div>
     </>
   );
 }
