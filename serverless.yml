@@ -10,4 +10,3 @@ functions:
   popcorn-watch:
     handler: handler.popcornWatch
     url: true
-
